@@ -1,5 +1,4 @@
 require 'ratistics'
-require 'iconv'
 
 module Gapminder
   extend self
@@ -26,10 +25,8 @@ module Gapminder
   ]
 
   def load
-    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-    data = File.open(CSV_FILE, 'rb').read
-    data = ic.iconv(data + ' ')[0..-2]
-    Ratistics::Load.csv_data(data, CSV_DEFINITION, :headers => true).freeze
+    puts 'Stand by. It will take 1-2 minutes to load all 289 records...'
+    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, :headers => true, :hamster => :vector).freeze
   end
 
 end

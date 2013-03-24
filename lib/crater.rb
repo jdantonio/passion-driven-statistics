@@ -1,13 +1,5 @@
 require 'ratistics'
-
-def timer
-  beginning_time = Time.now
-  puts "Started timer at #{beginning_time}..."
-  retval = yield
-  end_time = Time.now
-  puts "Time elapsed #{(end_time - beginning_time)*1000} milliseconds"
-  return retval
-end
+require 'hamster'
 
 module Crater
   extend self
@@ -20,14 +12,15 @@ module Crater
     [:longitude_circle_image, :to_f],
     [:diam_circle_image, :to_f],
     [:depth_rimfloor_topog, :to_f],
-    :morphology_ejecta_1,
-    :morphology_ejecta_2,
-    :morphology_ejecta_3,
+    [:morphology_ejecta_1, lambda{|item| item.split('/')}],
+    [:morphology_ejecta_2, lambda{|item| item.split('/')}],
+    [:morphology_ejecta_3, lambda{|item| item.split('/')}],
     [:number_layers, :to_i]
   ]
 
   def load
-    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, :headers => true).freeze
+    puts 'Stand by. It will take 5-6 minutes to load all 384,343 records...'
+    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, :headers => true, :hamster => :vector).freeze
   end
 
 end
