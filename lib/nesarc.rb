@@ -76,9 +76,9 @@ module Nesarc
     [:ethrace2a, :to_i]
   ]
 
-  def load
+  def load(opts={})
     puts 'Stand by. It will take 2-3 minutes to load all 43,093 records...'
-    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, :headers => true, :hamster => :vector).freeze
+    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, {:headers => true}.merge(opts)).freeze
   end
 
 end
