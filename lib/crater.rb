@@ -44,4 +44,29 @@ module Crater
     return data
   end
 
+  def load2
+    file = File.open(CSV_FILE, 'r')
+    data = Ratistics::Load.csv_data(file.read, CSV_DEFINITION, :headers => true).freeze
+    file.close
+    return data
+  end
+
+  def load3
+    regex = /("[^"]*",)|("[^"]*"$)|([^,]*,)|([^,]+$)/
+
+    file = File.open(CSV_FILE, 'r')
+    contents = file.read
+    file.close
+
+    data = []
+    contents.split($/).each do |row|
+      row = row.strip.scan(regex).collect do |match|
+        match.select{|m| ! m.nil? }.first.chomp(',').gsub(/"/, '')
+      end
+      data << row
+    end
+
+    return data
+  end
+
 end
