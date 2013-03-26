@@ -45,9 +45,12 @@ module Crater
   end
 
   def load2
-    file = File.open(CSV_FILE, 'r')
-    data = Ratistics::Load.csv_data(file.read, CSV_DEFINITION, :headers => true).freeze
-    file.close
+    #file = File.open(CSV_FILE, 'r')
+    #contents = file.read
+    #file.close
+
+    #data = Ratistics::Load.csv_data(contents, :headers => false, as: :frame).freeze
+    data = Ratistics::Load.csv_file_to_frame(CSV_FILE).freeze
     return data
   end
 
