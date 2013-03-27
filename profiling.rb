@@ -14,7 +14,9 @@ craters = Utilities.with_timer do
   #Ratistics::Loader.frame_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: false)
   #Ratistics::Loader.frame_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: true)
   #Ratistics::Loader.catalog_from_csv_data_using_headers(contents, headers: true)
-  Ratistics::Loader.catalog_from_csv_data_using_headers(contents, headers: false)
+  #Ratistics::Loader.catalog_from_csv_data_using_headers(contents, headers: false)
+  #Ratistics::Loader.catalog_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: false)
+  Ratistics::Loader.catalog_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: true)
 end
 
 p craters.length
