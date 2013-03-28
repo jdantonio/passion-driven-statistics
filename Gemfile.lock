@@ -17,8 +17,7 @@ GIT
 
 GIT
   remote: git://github.com/jdantonio/ratistics.git
-  revision: 48e19d33b9c23fc24ecb259e38861bfa442e5e68
-  branch: loading
+  revision: 26e6bd6cec7e2bdd9a0d12bc19f07983b7ed71a5
   specs:
     ratistics (0.2.3)
 
