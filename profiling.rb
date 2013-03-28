@@ -6,22 +6,34 @@ require_relative 'lib/crater'
 require 'pp'
 require 'ruby-prof'
 
-contents = Ratistics::Loader.file_contents(Crater::CSV_FILE)
+puts "\n==============================================\n"
 
 craters = Utilities.with_timer do
-  #Ratistics::Loader.frame_from_csv_data_using_headers(contents, headers: false)
-  #Ratistics::Loader.frame_from_csv_data_using_headers(contents, headers: true)
-  #Ratistics::Loader.frame_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: false)
-  #Ratistics::Loader.frame_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: true)
-  #Ratistics::Loader.catalog_from_csv_data_using_headers(contents, headers: true)
-  #Ratistics::Loader.catalog_from_csv_data_using_headers(contents, headers: false)
-  #Ratistics::Loader.catalog_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: false)
-  Ratistics::Loader.catalog_from_csv_data_using_definition(contents, def: Crater::CSV_DEFINITION, headers: true)
+  craters = Ratistics::Loader.csv_file(Crater::CSV_FILE, as: :hash, def: Crater::CSV_DEFINITION, headers: true)
 end
-
 p craters.length
 p craters.first
 p craters.last
+
+puts "\n----------------------------------------------\n"
+
+craters = Utilities.with_timer do
+  craters = Ratistics::Loader.csv_file(Crater::CSV_FILE, as: :catalog, def: Crater::CSV_DEFINITION, headers: true)
+end
+p craters.length
+p craters.first
+p craters.last
+
+puts "\n----------------------------------------------\n"
+
+craters = Utilities.with_timer do
+  craters = Ratistics::Loader.csv_file(Crater::CSV_FILE, as: :frame, def: Crater::CSV_DEFINITION, headers: true)
+end
+p craters.length
+p craters.first
+p craters.last
+
+puts "\n==============================================\n"
 
 #result = RubyProf.profile do
   #craters = Utilities.with_timer{Crater.load2}
