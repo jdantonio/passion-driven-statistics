@@ -15,8 +15,10 @@ GIT
       ratistics (~> 0.2.3)
       rmagick (~> 2.13.2)
 
-PATH
-  remote: ../ratistics
+GIT
+  remote: git://github.com/jdantonio/ratistics.git
+  revision: 48e19d33b9c23fc24ecb259e38861bfa442e5e68
+  branch: loading
   specs:
     ratistics (0.2.3)
 

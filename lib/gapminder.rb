@@ -26,7 +26,7 @@ module Gapminder
 
   def load(opts={})
     puts 'Stand by. It will take 1-2 minutes to load all 289 records...'
-    Ratistics::Load.csv_file(CSV_FILE, CSV_DEFINITION, {:headers => true}.merge(opts)).freeze
+    Ratistics::Load.csv_file(CSV_FILE, {:def => CSV_DEFINITION, :headers => true}.merge(opts)).freeze
   end
 
 end
