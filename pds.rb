@@ -26,38 +26,40 @@ definition = [
 
 puts 'Loading crater data...'
 craters = Ratistics::Load::Csv.file(file, :def => definition, :headers => true)
-puts "Loaded #{craters.length} records."
-puts
 
 puts 'Sorting crater data...'
-Ratistics.insertion_sort!(craters){|crater| crater[:crater_id]}
+craters.sort_by!{|crater| crater[:crater_id]}
 craters.freeze
-puts "\t#{craters.length} records."
-puts
 
 puts "Latitude..."
-latitude = Ratistics.frequency(craters, :as => :catalog){|crater| crater[:latitude_circle_image].floor}
-#Ratistics.insertion_sort!(latitude){|datum| datum.first}
-latitude.sort!{|datum| datum.first}
-puts "\t#{latitude.length} records."
+nearest_latitude = Ratistics.frequency(craters, :as => :catalog){|crater| crater[:latitude_circle_image].abs.floor}
+nearest_latitude.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Frequency of Mars Crater Latitude', latitude, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Latitude of Crater Center (nearest whole degree)', nearest_latitude, :from => :catalog)
 
 puts "Diameter..."
-diameter = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:diam_circle_image] * 100).floor}
-#Ratistics.insertion_sort!(diameter){|datum| datum.first}
-diameter.sort!{|datum| datum.first}
-puts "\t#{diameter.length} records."
+diam_circle_image = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:diam_circle_image]).floor}
+diam_circle_image.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Frequency of Mars Crater Diameter', diameter, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Crater Diameter (in km)', diam_circle_image, :from => :catalog)
 
 puts "Depth..."
-depth = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:depth_rimfloor_topog] * 100).floor}
-#Ratistics.insertion_sort!(depth){|datum| datum.first}
-depth.sort!{|datum| datum.first}
-puts "\t#{depth.length} records."
+depth_meters = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:depth_rimfloor_topog] * 1000).floor}
+depth_meters.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Frequency of Mars Crater Depth', depth, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Average Elevation of Crater Rim (in meters)', depth_meters, :from => :catalog)
 
-puts
+puts "Univariate data for Latitude..."
+lat = Ratistics.collect(craters){|crater| crater[:latitude_circle_image].abs.floor}
+n = lat.length
+mean = Ratistics.mean(lat)
+stddev = Ratistics.stddev(lat)
+variance = Ratistics.variance(lat)
+sum = Ratistics.sum(lat)
+puts "N: #{n}"
+puts "Mean: #{mean}"
+puts "Std Deviation: #{stddev}"
+puts "Variance: #{variance}"
+puts "Sum Observations: #{sum}"
+
 puts 'Done.'
