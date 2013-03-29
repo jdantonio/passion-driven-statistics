@@ -58,7 +58,7 @@ module Addhealth
 
   def load(opts={})
     puts 'Stand by. It will take 1-2 minutes to load all 6504 records...'
-    Ratistics::Load.csv_file(CSV_FILE, {:def => CSV_DEFINITION, :headers => true}.merge(opts)).freeze
+    Ratistics::Load::Csv.file(CSV_FILE, {:def => CSV_DEFINITION, :headers => true}.merge(opts)).freeze
   end
 
 end
