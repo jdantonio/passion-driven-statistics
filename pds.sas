@@ -18,7 +18,7 @@ DATA new; set mydata.marscrater_pds;
 NEAREST_LATITUDE = FLOOR(ABS(LATITUDE_CIRCLE_IMAGE));
 DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
 
-/* give friendly lanels to the columns I want to work with */
+/* give friendly labels to the columns I want to work with */
 LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
       DIAM_CIRCLE_IMAGE     = "Crater Diameter (in km)"
       DEPTH_RIMFLOOR_TOPOG  = "Average Elevation of Crater Rim (in km)";
