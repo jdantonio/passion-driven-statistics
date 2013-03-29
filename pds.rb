@@ -35,19 +35,25 @@ puts "Latitude..."
 nearest_latitude = Ratistics.frequency(craters, :as => :catalog){|crater| crater[:latitude_circle_image].abs.floor}
 nearest_latitude.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Latitude of Crater Center (nearest whole degree)', nearest_latitude, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Latitude of Crater Center', nearest_latitude, from: :catalog,
+                                             out: 'latitude', x_axis_label: 'Latitude (absolute value, nearest whole degree)',
+                                             y_axis_label: 'Number of Craters')
 
 puts "Diameter..."
 diam_circle_image = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:diam_circle_image]).floor}
 diam_circle_image.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Crater Diameter (in km)', diam_circle_image, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Crater Diameter', diam_circle_image, from: :catalog,
+                                             out: 'diameter', x_axis_label: 'Diameter (kilometers)',
+                                             y_axis_label: 'Number of Craters')
 
 puts "Depth..."
 depth_meters = Ratistics.frequency(craters, :as => :catalog){|crater| (crater[:depth_rimfloor_topog] * 1000).floor}
 depth_meters.sort!{|datum| datum.first}
 
-Ratistics::Chart::Histogram.simple_histogram('Average Elevation of Crater Rim (in meters)', depth_meters, :from => :catalog)
+Ratistics::Chart::Histogram.simple_histogram('Elevation of Crater Rim', depth_meters, from: :catalog,
+                                             out: 'depth', x_axis_label: 'Average Rim Elevation (in meters)',
+                                             y_axis_label: 'Number of Craters')
 
 puts "Univariate data for Latitude..."
 lat = Ratistics.collect(craters){|crater| crater[:latitude_circle_image].abs.floor}
