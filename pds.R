@@ -18,14 +18,14 @@ craters <- craters[order(craters$CRATER_ID,decreasing=F),]
 #View(craters)
 
 # sort each of my variables
-latitude <- as.ordered(craters$LATITUDE_CIRCLE_IMAGE)
-diameter <- as.ordered(craters$DIAM_CIRCLE_IMAGE)
-depth <- as.ordered(craters$DEPTH_RIMFLOOR_TOPOG)
+nearest_latitude <- as.ordered(floor(abs(craters$LATITUDE_CIRCLE_IMAGE)))
+approx_diameter <- as.ordered(floor(craters$DIAM_CIRCLE_IMAGE))
+depth_meters <- as.ordered(craters$DEPTH_RIMFLOOR_TOPOG * 1000)
 
 ## load the descriptive stats library
 library(descr)
 
 ## display the frequencies of my selected variables
-freq(latitude)
-freq(diameter)
-freq(depth)
+#freq(nearest_latitude)
+#freq(approx_diameter)
+#freq(depth_meters)
