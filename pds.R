@@ -1,6 +1,19 @@
+#********************************************************************
+# Gerald (Jerry) D'Antonio
+# Passion Driven Statistics via Coursera
+# Analysis of Mars Crater Data
+#
+# "Is there a relationship between the size of a crater and its
+#  distance from the equator?"
+#********************************************************************
 
 # to load this file from the R console
 #source('pds.R')
+
+## load additional libraries
+library(descr)
+#library(fBasics)
+library(pastecs)
 
 # load the data
 marscrater <- read.csv("data/marscrater_pds.csv")
@@ -22,10 +35,20 @@ nearest_latitude <- as.ordered(floor(abs(craters$LATITUDE_CIRCLE_IMAGE)))
 approx_diameter <- as.ordered(floor(craters$DIAM_CIRCLE_IMAGE))
 depth_meters <- as.ordered(craters$DEPTH_RIMFLOOR_TOPOG * 1000)
 
-## load the descriptive stats library
-library(descr)
-
 ## display the frequencies of my selected variables
 #freq(nearest_latitude)
 #freq(approx_diameter)
 #freq(depth_meters)
+
+# get basic descriptive statistics
+options(scipen=100)
+options(digits=4)
+
+print('Descriptive stats for LATITUDE_CIRCLE_IMAGE: Latitude of Crater Center')
+print(stat.desc(craters$LATITUDE_CIRCLE_IMAGE))
+
+print('Descriptive stats for DIAM_CIRCLE_IMAGE: Crater Diameter (in km)')
+print(stat.desc(craters$DIAM_CIRCLE_IMAGE))
+
+print('Descriptive stats for DEPTH_RIMFLOOR_TOPOG: Average Elevation of Crater Rim (in km)')
+print(stat.desc(craters$DEPTH_RIMFLOOR_TOPOG))

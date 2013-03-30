@@ -1,0 +1,23 @@
+[1] "Descriptive stats for LATITUDE_CIRCLE_IMAGE: Latitude of Crater Center"
+       nbr.val       nbr.null         nbr.na            min            max 
+  384343.00000        7.00000        0.00000      -86.70000       85.70200 
+         range            sum         median           mean        SE.mean 
+     172.40200 -2766965.49300      -10.07900       -7.19921        0.05421 
+  CI.mean.0.95            var        std.dev       coef.var 
+       0.10625     1129.56262       33.60897       -4.66843 
+
+[1] "Descriptive stats for DIAM_CIRCLE_IMAGE: Crater Diameter (in km)"
+      nbr.val      nbr.null        nbr.na           min           max 
+ 384343.00000       0.00000       0.00000       1.00000    1164.22000 
+        range           sum        median          mean       SE.mean 
+   1163.22000 1366987.52000       1.53000       3.55669       0.01386 
+ CI.mean.0.95           var       std.dev      coef.var 
+      0.02716      73.82234       8.59199       2.41573 
+
+[1] "Descriptive stats for DEPTH_RIMFLOOR_TOPOG: Average Elevation of Crater Rim (in km)"
+       nbr.val       nbr.null         nbr.na            min            max 
+384343.0000000 307529.0000000      0.0000000     -0.4200000      4.9500000 
+         range            sum         median           mean        SE.mean 
+     5.3700000  29147.6300000      0.0000000      0.0758375      0.0003573 
+  CI.mean.0.95            var        std.dev       coef.var 
+     0.0007003      0.0490700      0.2215175      2.9209479
