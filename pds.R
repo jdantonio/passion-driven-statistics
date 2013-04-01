@@ -11,6 +11,9 @@
 #source('pds.R')
 
 ## load additional libraries
+#install.packages('descr')
+#install.packages('fBasics')
+#install.packages('pastecs')
 library(descr)
 #library(fBasics)
 library(pastecs)
