@@ -13,8 +13,9 @@ libname mydata "/courses/u_coursera.org1/i_1006328/c_5333" access=readonly;
 /* get the mars crater data from the data set */
 DATA new; set mydata.marscrater_pds;
 
-/* round latitude to nearest degree
+/* round latitude to nearest degree, nearest 10 degrees
    convert depth to meters */
+NEAREST_LATITUDE = FLOOR(ABS(LATITUDE_CIRCLE_IMAGE));
 LATITUDE_BAND = FLOOR(ABS(LATITUDE_CIRCLE_IMAGE) / 10);
 DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
 
@@ -33,9 +34,9 @@ PROC SORT; by CRATER_ID;
 /*PROC PRINT; VAR latitude_band;*/
 
 /* calculate frequency data */
-PROC FREQ; TABLES latitude_band DIAM_CIRCLE_IMAGE depth_meters;
+PROC FREQ; TABLES latitude_band nearest_latitude depth_meters;
 
-PROC UNIVARIATE; VAR latitude_band DIAM_CIRCLE_IMAGE depth_meters;
+PROC UNIVARIATE; VAR latitude_band nearest_latitude depth_meters;
 
 /* run the program - always required */
 run;

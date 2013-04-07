@@ -1,9 +1,9 @@
-1                                                          The SAS System                               14:21 Friday, March 29, 2013
+1                                                          The SAS System                                17:41 Sunday, April 7, 2013
 
 1          ;*';*";*/;quit;run;
 2          OPTIONS PAGENO=MIN;
 3          %LET _CLIENTTASKLABEL='pds';
-4          %LET _CLIENTPROJECTPATH='C:\Users\Jerry\Projects\passion-driven-statistics\pds.egp';
+4          %LET _CLIENTPROJECTPATH='C:\Users\jdantonio\Projects\FOSS\passion-driven-statistics\pds.egp';
 5          %LET _CLIENTPROJECTNAME='pds.egp';
 6          %LET _SASPROGRAMFILE=;
 7          
@@ -38,102 +38,103 @@ NOTE: Data file MYDATA.MARSCRATER_PDS.DATA is in a format that is native to anot
       session encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce 
       performance.
 29         
-30         /* round latitude to nearest degree
+30         /* round latitude to nearest degree, nearest 10 degrees
 31            convert depth to meters */
 32         NEAREST_LATITUDE = FLOOR(ABS(LATITUDE_CIRCLE_IMAGE));
-33         DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
-34         
-35         /* give friendly lanels to the columns I want to work with */
-36         LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
-37               DIAM_CIRCLE_IMAGE     = "Crater Diameter (in km)"
-38               DEPTH_RIMFLOOR_TOPOG  = "Average Elevation of Crater Rim (in km)";
-39         
-40         LABEL NEAREST_LATITUDE = "Latitude of Crater Center (nearest whole degree)"
-41               DEPTH_METERS     = "Average Elevation of Crater Rim (in meters)";
-42         
-43         /* sort the data by crater_id, asc */
+33         LATITUDE_BAND = FLOOR(ABS(LATITUDE_CIRCLE_IMAGE) / 10);
+34         DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
+35         
+36         /* give friendly labels to the columns I want to work with */
+37         LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
+38               DIAM_CIRCLE_IMAGE     = "Crater Diameter (in km)"
+39               DEPTH_RIMFLOOR_TOPOG  = "Average Elevation of Crater Rim (in km)";
+40         
+41         LABEL LATITUDE_BAND    = "Relative Distance from Equator (latitude absolute value, nearest 10 degrees)"
+42               DEPTH_METERS     = "Average Elevation of Crater Rim (in meters)";
+43         
+44         /* sort the data by crater_id, asc */
 
 NOTE: There were 384343 observations read from the data set MYDATA.MARSCRATER_PDS.
-NOTE: The data set WORK.NEW has 384343 observations and 12 variables.
+NOTE: The data set WORK.NEW has 384343 observations and 13 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.19 seconds
-      user cpu time       0.57 seconds
-2                                                          The SAS System                               14:21 Friday, March 29, 2013
+      real time           1.61 seconds
+2                                                          The SAS System                                17:41 Sunday, April 7, 2013
 
-      system cpu time     0.13 seconds
-      memory              862.46k
-      OS Memory           36660.00k
-      Timestamp           03/29/2013 02:40:08 PM
+      user cpu time       0.49 seconds
+      system cpu time     0.16 seconds
+      memory              878.09k
+      OS Memory           14132.00k
+      Timestamp           04/07/2013 05:54:54 PM
       Page Faults                       0
-      Page Reclaims                     149
+      Page Reclaims                     161
       Page Swaps                        0
-      Voluntary Context Switches        4687
-      Involuntary Context Switches      42
+      Voluntary Context Switches        4672
+      Involuntary Context Switches      9
       Block Input Operations            0
-      Block Output Operations           120648
+      Block Output Operations           126792
       
-44         PROC SORT; by CRATER_ID;
+45         PROC SORT; by CRATER_ID;
 
-45         
-46         /* big data set, will take a lot of time */
-47         /*PROC PRINT; VAR nearest_latitude;*/
-48         
-49         /* calculate frequency data */
+46         
+47         /* big data set, will take a lot of time */
+48         /*PROC PRINT; VAR latitude_band;*/
+49         
+50         /* calculate frequency data */
 
 NOTE: There were 384343 observations read from the data set WORK.NEW.
-NOTE: The data set WORK.NEW has 384343 observations and 12 variables.
+NOTE: The data set WORK.NEW has 384343 observations and 13 variables.
 NOTE: PROCEDURE SORT used (Total process time):
-      real time           0.90 seconds
-      user cpu time       0.17 seconds
-      system cpu time     0.10 seconds
-      memory              84862.64k
-      OS Memory           120436.00k
-      Timestamp           03/29/2013 02:40:08 PM
+      real time           0.76 seconds
+      user cpu time       0.14 seconds
+      system cpu time     0.12 seconds
+      memory              88191.98k
+      OS Memory           101236.00k
+      Timestamp           04/07/2013 05:54:55 PM
       Page Faults                       0
-      Page Reclaims                     6312
+      Page Reclaims                     6530
       Page Swaps                        0
-      Voluntary Context Switches        1959
-      Involuntary Context Switches      1
+      Voluntary Context Switches        1050
+      Involuntary Context Switches      2
       Block Input Operations            0
-      Block Output Operations           120648
+      Block Output Operations           126792
       
-50         PROC FREQ; TABLES nearest_latitude DIAM_CIRCLE_IMAGE depth_meters;
+51         PROC FREQ; TABLES latitude_band nearest_latitude depth_meters;
 
-51         
+52         
 
 NOTE: There were 384343 observations read from the data set WORK.NEW.
 NOTE: PROCEDURE FREQ used (Total process time):
-      real time           2.62 seconds
-      user cpu time       2.59 seconds
+      real time           0.24 seconds
+      user cpu time       0.21 seconds
       system cpu time     0.02 seconds
-      memory              2124.25k
-      OS Memory           38204.00k
-      Timestamp           03/29/2013 02:40:11 PM
+      memory              1401.73k
+      OS Memory           14392.00k
+      Timestamp           04/07/2013 05:54:55 PM
       Page Faults                       0
-      Page Reclaims                     459
+      Page Reclaims                     109
       Page Swaps                        0
       Voluntary Context Switches        99
-      Involuntary Context Switches      3
+      Involuntary Context Switches      1
       Block Input Operations            0
-      Block Output Operations           2256
+      Block Output Operations           328
       
-52         PROC UNIVARIATE; VAR nearest_latitude DIAM_CIRCLE_IMAGE depth_meters;
-3                                                          The SAS System                               14:21 Friday, March 29, 2013
+3                                                          The SAS System                                17:41 Sunday, April 7, 2013
 
+53         PROC UNIVARIATE; VAR latitude_band nearest_latitude depth_meters;
 
-53         
-54         /* run the program - always required */
-55         run;
+54         
+55         /* run the program - always required */
+56         run;
 
 NOTE: PROCEDURE UNIVARIATE used (Total process time):
       real time           0.18 seconds
       user cpu time       0.16 seconds
-      system cpu time     0.02 seconds
-      memory              1014.68k
-      OS Memory           37684.00k
-      Timestamp           03/29/2013 02:40:11 PM
+      system cpu time     0.01 seconds
+      memory              697.45k
+      OS Memory           14132.00k
+      Timestamp           04/07/2013 05:54:56 PM
       Page Faults                       0
-      Page Reclaims                     209
+      Page Reclaims                     47
       Page Swaps                        0
       Voluntary Context Switches        163
       Involuntary Context Switches      0
@@ -141,17 +142,17 @@ NOTE: PROCEDURE UNIVARIATE used (Total process time):
       Block Output Operations           24
       
 
-56         
 57         
-58         GOPTIONS NOACCESSIBLE;
-59         %LET _CLIENTTASKLABEL=;
-60         %LET _CLIENTPROJECTPATH=;
-61         %LET _CLIENTPROJECTNAME=;
-62         %LET _SASPROGRAMFILE=;
-63         
-64         ;*';*";*/;quit;run;
-65         ODS _ALL_ CLOSE;
-66         
+58         
+59         GOPTIONS NOACCESSIBLE;
+60         %LET _CLIENTTASKLABEL=;
+61         %LET _CLIENTPROJECTPATH=;
+62         %LET _CLIENTPROJECTNAME=;
+63         %LET _SASPROGRAMFILE=;
+64         
+65         ;*';*";*/;quit;run;
+66         ODS _ALL_ CLOSE;
 67         
-68         QUIT; RUN;
-69         
+68         
+69         QUIT; RUN;
+70         
