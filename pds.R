@@ -11,6 +11,9 @@
 #source('pds.R')
 
 ## load additional libraries
+#install.packages('descr', dep=T)
+#install.packages('fBasics', dep=T)
+#install.packages('pastecs', dep=T)
 library(descr)
 #library(fBasics)
 library(pastecs)
@@ -31,14 +34,28 @@ craters <- craters[order(craters$CRATER_ID,decreasing=F),]
 #View(craters)
 
 # sort each of my variables
-nearest_latitude <- as.ordered(floor(abs(craters$LATITUDE_CIRCLE_IMAGE)))
-approx_diameter <- as.ordered(floor(craters$DIAM_CIRCLE_IMAGE))
-depth_meters <- as.ordered(craters$DEPTH_RIMFLOOR_TOPOG * 1000)
+nearest_latitude <- floor(craters$LATITUDE_CIRCLE_IMAGE)
+latitude_group <- floor(craters$LATITUDE_CIRCLE_IMAGE / 10)
+approx_diameter <- floor(craters$DIAM_CIRCLE_IMAGE)
+depth_meters <- craters$DEPTH_RIMFLOOR_TOPOG * 1000
 
 ## display the frequencies of my selected variables
+#freq(craters$LATITUDE_CIRCLE_IMAGE)
+#freq(craters$DIAM_CIRCLE_IMAGE)
+#freq(craters$DEPTH_RIMFLOOR_TOPOG)
 #freq(nearest_latitude)
+#freq(latitude_group)
 #freq(approx_diameter)
 #freq(depth_meters)
+
+## display boxplots for my selected variables
+#boxplot(craters$LATITUDE_CIRCLE_IMAGE)
+#boxplot(craters$DIAM_CIRCLE_IMAGE)
+#boxplot(craters$DEPTH_RIMFLOOR_TOPOG)
+#boxplot(nearest_latitude)
+#boxplot(latitude_group)
+#boxplot(approx_diameter)
+#boxplot(depth_meters)
 
 # get basic descriptive statistics
 options(scipen=100)
@@ -52,3 +69,31 @@ print(stat.desc(craters$DIAM_CIRCLE_IMAGE))
 
 print('Descriptive stats for DEPTH_RIMFLOOR_TOPOG: Average Elevation of Crater Rim (in km)')
 print(stat.desc(craters$DEPTH_RIMFLOOR_TOPOG))
+
+print('Descriptive stats for derived data')
+print('nearest_latitude:')
+print(stat.desc(nearest_latitude))
+
+print('latitude_group:')
+print(stat.desc(latitude_group))
+
+print('approx_diameter:')
+print(stat.desc(approx_diameter))
+
+print('depth_meters:')
+print(stat.desc(depth_meters))
+
+# create scatterplots of the explanatory variable (latitude)
+# and the two two response variables (diameter and depth)
+# with fit lines for regression (y~x) and lowess (x,y)
+plot(craters$LATITUDE_CIRCLE_IMAGE, craters$DIAM_CIRCLE_IMAGE,
+     xlab="latitude from the derived center (decimal degrees North)",
+     ylab="diameter (units are km)")
+abline(lm(craters$DIAM_CIRCLE_IMAGE~craters$LATITUDE_CIRCLE_IMAGE), col="red")
+lines(lowess(craters$LATITUDE_CIRCLE_IMAGE,craters$DIAM_CIRCLE_IMAGE), col="blue")
+
+plot(craters$LATITUDE_CIRCLE_IMAGE, craters$DEPTH_RIMFLOOR_TOPOG,
+     xlab="latitude from the derived center (decimal degrees North)",
+     ylab="average elevation (units are km)")
+abline(lm(craters$DEPTH_RIMFLOOR_TOPOG ~ craters$LATITUDE_CIRCLE_IMAGE), col="red")
+lines(lowess(craters$LATITUDE_CIRCLE_IMAGE, craters$DEPTH_RIMFLOOR_TOPOG), col="blue")
