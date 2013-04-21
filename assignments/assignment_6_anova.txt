@@ -1,13 +1,20 @@
+
+-------------------------------------------------------------------------------------------
+
 H(0) There is no association between the hemisphere where a crater is located and its diameter.
 H(A) There is an association between the hemisphere where a crater is located and its diameter.
 
 F = 696.90
 P < .0001
 
-Accept H(A)
-
 South (0) Mean 3.83096531 Std Dev 9.47716900
 North (1) Mean 3.13234787 Std Dev 6.98436108
+
+Accept H(A)
+
+When examining the association between crater diameter (quantitative response variable) and hemisphere (North or South) in which a crater is located (categorical explanatory variable), an Analysis of Variance (ANOVA) revealed that craters in the Southern hemisphere are significantly larger (Mean 3.83 km, s.d. ±9.48 km) compared to those in the Northern hemisphere (Mean 3.13 km, s.d. ±6.98 km), F(1, 384343) = 696.90, p < 0.0001.
+
+-------------------------------------------------------------------------------------------
 
 H(0) There is no association between the hemisphere where a crater is located and its depth.
 H(A) There is an association between the hemisphere where a crater is located and its depth.
@@ -15,7 +22,9 @@ H(A) There is an association between the hemisphere where a crater is located an
 F = 451.15
 P < .0001
 
-Accept H(A)
-
 South (0) Mean 0.08193563 Std Dev 0.23190740
 North (1) Mean 0.06640317 Std Dev 0.20404722
+
+Accept H(A)
+
+When examining the association between crater dwpth (quantitative response variable) and hemisphere (North or South) in which a crater is located (categorical explanatory variable), an Analysis of Variance (ANOVA) revealed that craters in the Southern hemisphere are significantly deeper (Mean 81.9 m, s.d. ±231.9 m) compared to those in the Northern hemisphere (Mean 66.4 m, s.d. ±204.0 m), F(1, 384343) = 451.15, p < 0.0001.
