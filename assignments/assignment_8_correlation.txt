@@ -1,0 +1,24 @@
+
+-------------------------------------------------------------------------------------------
+
+H(0) There is no association between the latitude of a crater and its diameter.
+H(A) There is an association between the latitude of a crater and its diameter.
+
+Corr -0.05794
+p < 0.0001
+
+Accept H(A)
+
+Among Mars craters, the correlation between crater latitude (quantitative explanatory variable) and crater diameter (quantitative response variable) was 0.05794 (p < 0.0001), suggesting that only 0.3% (i.e. -0.05794 squared) of the diameter variance can be explained by latitude.
+
+-------------------------------------------------------------------------------------------
+
+H(0) There is no association between the latitude of a crater and its depth.
+H(A) There is an association between the latitude of a crater and its depth.
+
+Corr -0.04288
+p < 0.0001
+
+Accept H(A)
+
+Among Mars craters, the correlation between crater latitude (quantitative explanatory variable) and crater depth (quantitative response variable) was -0.04288 (p < 0.0001), suggesting that only 0.2% (i.e. -0.04288 squared) of the depth variance can be explained by latitude.
