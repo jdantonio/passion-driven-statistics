@@ -20,6 +20,9 @@ LATITUDE_GROUP = FLOOR(LATITUDE_CIRCLE_IMAGE / 10);
 APPROX_DIAMETER = FLOOR(DIAM_CIRCLE_IMAGE);
 DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
 
+if LATITUDE_CIRCLE_IMAGE lt 0 then HEMISPHERE = 0;
+else HEMISPHERE = 1;
+
 /* give friendly labels to the columns I want to work with */
 LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
       DIAM_CIRCLE_IMAGE     = "Crater Diameter (in km)"
@@ -28,7 +31,8 @@ LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
 LABEL NEAREST_LATITUDE = "Relative Distance from Equator (nearest 1 degree latitude)"
       LATITUDE_GROUP   = "Relative Distance from Equator (nearest 10 degrees latitude)"
 	  APPROX_DIAMETER  = "Crater Diameter (nearest 1 km)"
-      DEPTH_METERS     = "Average Elevation of Crater Rim (in meters)";
+      DEPTH_METERS     = "Average Elevation of Crater Rim (in meters)"
+      HEMISPHERE       = "Hemisphere with respect to equator (0=South, 1=North)";
 
 /* sort the data by crater_id, asc */
 PROC SORT; by CRATER_ID;
@@ -37,9 +41,25 @@ PROC SORT; by CRATER_ID;
 /*PROC PRINT; VAR latitude_group;*/
 
 /* calculate frequency data */
-PROC FREQ; TABLES latitude_group nearest_latitude depth_meters;
+/*PROC FREQ; TABLES latitude_group nearest_latitude depth_meters;*/
 
-PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;
+/*PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;*/
+
+PROC ANOVA; class HEMISPHERE;
+            model DIAM_CIRCLE_IMAGE = HEMISPHERE;
+			means HEMISPHERE;
+
+PROC ANOVA; class HEMISPHERE;
+            model DEPTH_RIMFLOOR_TOPOG = HEMISPHERE;
+			means HEMISPHERE;
+
+PROC ANOVA; class LATITUDE_GROUP;
+            model DIAM_CIRCLE_IMAGE = LATITUDE_GROUP;
+			means LATITUDE_GROUP /DUNCAN;
+
+PROC ANOVA; class LATITUDE_GROUP;
+            model DEPTH_RIMFLOOR_TOPOG = LATITUDE_GROUP;
+			means LATITUDE_GROUP /DUNCAN;
 
 /* run the program - always required */
 run;

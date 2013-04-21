@@ -1,0 +1,21 @@
+H(0) There is no association between the hemisphere where a crater is located and its diameter.
+H(A) There is an association between the hemisphere where a crater is located and its diameter.
+
+F = 696.90
+P < .0001
+
+Accept H(A)
+
+South (0) Mean 3.83096531 Std Dev 9.47716900
+North (1) Mean 3.13234787 Std Dev 6.98436108
+
+H(0) There is no association between the hemisphere where a crater is located and its depth.
+H(A) There is an association between the hemisphere where a crater is located and its depth.
+
+F = 451.15
+P < .0001
+
+Accept H(A)
+
+South (0) Mean 0.08193563 Std Dev 0.23190740
+North (1) Mean 0.06640317 Std Dev 0.20404722
