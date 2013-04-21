@@ -1,0 +1,12 @@
+H(0) There is no association between a crater's hemisphere and the existence of a classifiable primary morphology.
+H(A) There is an association between a crater's hemisphere and the existence of a classifiable primary morphology.
+
+Southern Hemisphere Col Pct 11.08
+Northern Hemisphere Col Pct 12.43
+
+Chi Square 163.5012
+P < 0.0001
+
+Accept H(A)
+
+When examining the association between the presences of classifiable primary morphology (categorical response variable) hemisphere (North or South) in which a crater is located (categorical explanatory variable), a chi-square test of independence revealed that craters in the Northern hemisphere are more likely to have a classifiable primary morphology (12.43%) compared to those in the Southern hemisphere (11.08%), X2 = 163.5012, 1 df, p < 0.0001.
