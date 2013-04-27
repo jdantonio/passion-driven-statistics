@@ -33,7 +33,7 @@ LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
 
 LABEL NEAREST_LATITUDE   = "Relative Distance from Equator (nearest 1 degree latitude)"
       LATITUDE_GROUP     = "Relative Distance from Equator (nearest 10 degrees latitude)"
-	  APPROX_DIAMETER    = "Crater Diameter (nearest 1 km)"
+      APPROX_DIAMETER    = "Crater Diameter (nearest 1 km)"
       DEPTH_METERS       = "Average Elevation of Crater Rim (in meters)"
       HEMISPHERE         = "Hemisphere with respect to equator (0=South, 1=North)"
       PRIMARY_MORPHOLOGY = "Crater has a classifiable primary morphology (1) or does not (0)";
@@ -53,19 +53,19 @@ PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;
 
 PROC ANOVA; class HEMISPHERE;
             model DIAM_CIRCLE_IMAGE = HEMISPHERE;
-			means HEMISPHERE;
+            means HEMISPHERE;
 
 PROC ANOVA; class HEMISPHERE;
             model DEPTH_RIMFLOOR_TOPOG = HEMISPHERE;
-			means HEMISPHERE;
+            means HEMISPHERE;
 
 PROC ANOVA; class LATITUDE_GROUP;
             model DIAM_CIRCLE_IMAGE = LATITUDE_GROUP;
-			means LATITUDE_GROUP /DUNCAN;
+            means LATITUDE_GROUP /DUNCAN;
 
 PROC ANOVA; class LATITUDE_GROUP;
             model DEPTH_RIMFLOOR_TOPOG = LATITUDE_GROUP;
-			means LATITUDE_GROUP /DUNCAN;
+            means LATITUDE_GROUP /DUNCAN;
 
 /* Chi Square tests */
 PROC FREQ; tables PRIMARY_MORPHOLOGY*HEMISPHERE /CHISQ;
