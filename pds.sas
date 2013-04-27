@@ -45,12 +45,12 @@ PROC SORT; by CRATER_ID;
 /*PROC PRINT; VAR latitude_group;*/
 
 /* calculate frequency data */
-/*PROC FREQ; TABLES latitude_group nearest_latitude depth_meters;*/
-/*PROC FREQ; TABLES MORPHOLOGY_EJECTA_1 PRIMARY_MORPHOLOGY;*/
+PROC FREQ; TABLES latitude_group nearest_latitude depth_meters;
+PROC FREQ; TABLES MORPHOLOGY_EJECTA_1 PRIMARY_MORPHOLOGY;
 
-/*PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;*/
+PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;
 
-/*
+
 PROC ANOVA; class HEMISPHERE;
             model DIAM_CIRCLE_IMAGE = HEMISPHERE;
 			means HEMISPHERE;
@@ -66,12 +66,9 @@ PROC ANOVA; class LATITUDE_GROUP;
 PROC ANOVA; class LATITUDE_GROUP;
             model DEPTH_RIMFLOOR_TOPOG = LATITUDE_GROUP;
 			means LATITUDE_GROUP /DUNCAN;
-*/
 
 /* Chi Square tests */
-/*
 PROC FREQ; tables PRIMARY_MORPHOLOGY*HEMISPHERE /CHISQ;
-*/
 
 /* Correlation */
 PROC CORR; VAR DIAM_CIRCLE_IMAGE DEPTH_RIMFLOOR_TOPOG LATITUDE_CIRCLE_IMAGE;

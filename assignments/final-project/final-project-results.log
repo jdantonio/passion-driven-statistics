@@ -1,0 +1,318 @@
+1          ;*';*";*/;quit;run;
+2          OPTIONS PAGENO=MIN;
+3          %LET _CLIENTTASKLABEL='pds';
+4          %LET _CLIENTPROJECTPATH='C:\Users\jdantonio\Projects\School\passion-driven-statistics\pds.egp';
+5          %LET _CLIENTPROJECTNAME='pds.egp';
+6          %LET _SASPROGRAMFILE=;
+7          
+8          ODS _ALL_ CLOSE;
+9          OPTIONS DEV=ACTIVEX;
+10         GOPTIONS XPIXELS=0 YPIXELS=0;
+11         FILENAME EGSR TEMP;
+12         ODS tagsets.sasreport12(ID=EGSR) FILE=EGSR STYLE=Analysis
+12       ! STYLESHEET=(URL="file:///C:/Program%20Files%20(x86)/SAS/EnterpriseGuideAcademics/4.3/Styles/Analysis.css") NOGTITLE
+12       ! NOGFOOTNOTE GPATH=&sasworklocation ENCODING=UTF8 options(rolap="on");
+NOTE: Writing TAGSETS.SASREPORT12(EGSR) Body file: EGSR
+13         
+14         GOPTIONS ACCESSIBLE;
+15         /********************************************************************
+16          Gerald (Jerry) D'Antonio
+17          Passion Driven Statistics via Coursera
+18          Analysis of Mars Crater Data
+19         
+20          "Is there a relationship between the size of a crater and its
+21           distance from the equator?"
+22          *******************************************************************/
+23         
+24         /* load the class data set */
+25         libname mydata "/courses/u_coursera.org1/i_1006328/c_5333" access=readonly;
+NOTE: Libref MYDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /courses/u_coursera.org1/i_1006328/c_5333
+26         
+27         /* get the mars crater data from the data set */
+28         DATA new; set mydata.marscrater_pds;
+NOTE: Data file MYDATA.MARSCRATER_PDS.DATA is in a format that is native to another host, or the file encoding does not match the 
+      session encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce 
+      performance.
+29         
+30         /* round latitude to nearest degree, nearest 10 degrees
+31            convert depth to meters */
+32         NEAREST_LATITUDE = FLOOR(LATITUDE_CIRCLE_IMAGE);
+33         LATITUDE_GROUP = FLOOR(LATITUDE_CIRCLE_IMAGE / 10);
+34         APPROX_DIAMETER = FLOOR(DIAM_CIRCLE_IMAGE);
+35         DEPTH_METERS = DEPTH_RIMFLOOR_TOPOG * 1000;
+36         
+37         if LATITUDE_CIRCLE_IMAGE lt 0 then HEMISPHERE = 0;
+38         else HEMISPHERE = 1;
+39         
+40         if MORPHOLOGY_EJECTA_1 = "" then PRIMARY_MORPHOLOGY = 0;
+41         else PRIMARY_MORPHOLOGY = 1;
+42         
+43         /* give friendly labels to the columns I want to work with */
+44         LABEL LATITUDE_CIRCLE_IMAGE = "Latitude of Crater Center"
+45               DIAM_CIRCLE_IMAGE     = "Crater Diameter (in km)"
+46               DEPTH_RIMFLOOR_TOPOG  = "Average Elevation of Crater Rim (in km)";
+47         
+48         LABEL NEAREST_LATITUDE   = "Relative Distance from Equator (nearest 1 degree latitude)"
+2                                                          The SAS System                             15:18 Saturday, April 27, 2013
+
+49               LATITUDE_GROUP     = "Relative Distance from Equator (nearest 10 degrees latitude)"
+50         	  APPROX_DIAMETER    = "Crater Diameter (nearest 1 km)"
+51               DEPTH_METERS       = "Average Elevation of Crater Rim (in meters)"
+52               HEMISPHERE         = "Hemisphere with respect to equator (0=South, 1=North)"
+53               PRIMARY_MORPHOLOGY = "Crater has a classifiable primary morphology (1) or does not (0)";
+54         
+55         /* sort the data by crater_id, asc */
+
+NOTE: There were 384343 observations read from the data set MYDATA.MARSCRATER_PDS.
+NOTE: The data set WORK.NEW has 384343 observations and 16 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.12 seconds
+      user cpu time       0.48 seconds
+      system cpu time     0.12 seconds
+      memory              950.78k
+      OS Memory           12844.00k
+      Timestamp           04/27/2013 03:19:12 PM
+      Page Faults                       0
+      Page Reclaims                     302
+      Page Swaps                        0
+      Voluntary Context Switches        4672
+      Involuntary Context Switches      1
+      Block Input Operations            0
+      Block Output Operations           144392
+      
+56         PROC SORT; by CRATER_ID;
+
+57         
+58         /* big data set, will take a lot of time */
+59         /*PROC PRINT; VAR latitude_group;*/
+60         
+61         /* calculate frequency data */
+
+NOTE: There were 384343 observations read from the data set WORK.NEW.
+NOTE: The data set WORK.NEW has 384343 observations and 16 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.42 seconds
+      user cpu time       0.16 seconds
+      system cpu time     0.12 seconds
+      memory              98233.46k
+      OS Memory           110444.00k
+      Timestamp           04/27/2013 03:19:12 PM
+      Page Faults                       0
+      Page Reclaims                     6416
+      Page Swaps                        0
+      Voluntary Context Switches        1191
+      Involuntary Context Switches      5
+      Block Input Operations            16
+      Block Output Operations           144720
+      
+62         PROC FREQ; TABLES latitude_group nearest_latitude depth_meters;
+
+
+NOTE: There were 384343 observations read from the data set WORK.NEW.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.27 seconds
+      user cpu time       0.24 seconds
+      system cpu time     0.02 seconds
+3                                                          The SAS System                             15:18 Saturday, April 27, 2013
+
+      memory              1477.70k
+      OS Memory           14136.00k
+      Timestamp           04/27/2013 03:19:13 PM
+      Page Faults                       0
+      Page Reclaims                     445
+      Page Swaps                        0
+      Voluntary Context Switches        100
+      Involuntary Context Switches      1
+      Block Input Operations            0
+      Block Output Operations           344
+      
+63         PROC FREQ; TABLES MORPHOLOGY_EJECTA_1 PRIMARY_MORPHOLOGY;
+
+64         
+
+NOTE: There were 384343 observations read from the data set WORK.NEW.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.14 seconds
+      user cpu time       0.12 seconds
+      system cpu time     0.01 seconds
+      memory              815.39k
+      OS Memory           14136.00k
+      Timestamp           04/27/2013 03:19:13 PM
+      Page Faults                       0
+      Page Reclaims                     95
+      Page Swaps                        0
+      Voluntary Context Switches        132
+      Involuntary Context Switches      1
+      Block Input Operations            0
+      Block Output Operations           288
+      
+65         PROC UNIVARIATE; VAR latitude_group nearest_latitude approx_diameter;
+
+66         
+67         
+
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           0.26 seconds
+      user cpu time       0.15 seconds
+      system cpu time     0.01 seconds
+      memory              801.64k
+      OS Memory           13876.00k
+      Timestamp           04/27/2013 03:19:13 PM
+      Page Faults                       0
+      Page Reclaims                     258
+      Page Swaps                        0
+      Voluntary Context Switches        170
+      Involuntary Context Switches      1
+      Block Input Operations            0
+      Block Output Operations           88
+      
+68         PROC ANOVA; class HEMISPHERE;
+
+69                     model DIAM_CIRCLE_IMAGE = HEMISPHERE;
+70         			means HEMISPHERE;
+71         
+
+NOTE: PROCEDURE ANOVA used (Total process time):
+4                                                          The SAS System                             15:18 Saturday, April 27, 2013
+
+      real time           0.19 seconds
+      user cpu time       0.12 seconds
+      system cpu time     0.02 seconds
+      memory              1466.70k
+      OS Memory           14912.00k
+      Timestamp           04/27/2013 03:19:13 PM
+      Page Faults                       0
+      Page Reclaims                     475
+      Page Swaps                        0
+      Voluntary Context Switches        359
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           12064
+      
+72         PROC ANOVA; class HEMISPHERE;
+
+73                     model DEPTH_RIMFLOOR_TOPOG = HEMISPHERE;
+74         			means HEMISPHERE;
+75         
+
+NOTE: PROCEDURE ANOVA used (Total process time):
+      real time           0.19 seconds
+      user cpu time       0.12 seconds
+      system cpu time     0.03 seconds
+      memory              1417.37k
+      OS Memory           14912.00k
+      Timestamp           04/27/2013 03:19:14 PM
+      Page Faults                       0
+      Page Reclaims                     120
+      Page Swaps                        0
+      Voluntary Context Switches        359
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           12056
+      
+76         PROC ANOVA; class LATITUDE_GROUP;
+
+77                     model DIAM_CIRCLE_IMAGE = LATITUDE_GROUP;
+78         			means LATITUDE_GROUP /DUNCAN;
+79         
+
+NOTE: PROCEDURE ANOVA used (Total process time):
+      real time           0.26 seconds
+      user cpu time       0.17 seconds
+      system cpu time     0.02 seconds
+      memory              1657.28k
+      OS Memory           14912.00k
+      Timestamp           04/27/2013 03:19:14 PM
+      Page Faults                       0
+      Page Reclaims                     187
+      Page Swaps                        0
+      Voluntary Context Switches        499
+      Involuntary Context Switches      1
+      Block Input Operations            0
+      Block Output Operations           12072
+      
+80         PROC ANOVA; class LATITUDE_GROUP;
+
+5                                                          The SAS System                             15:18 Saturday, April 27, 2013
+
+81                     model DEPTH_RIMFLOOR_TOPOG = LATITUDE_GROUP;
+82         			means LATITUDE_GROUP /DUNCAN;
+83         
+84         /* Chi Square tests */
+
+NOTE: PROCEDURE ANOVA used (Total process time):
+      real time           0.43 seconds
+      user cpu time       0.17 seconds
+      system cpu time     0.02 seconds
+      memory              1624.12k
+      OS Memory           14912.00k
+      Timestamp           04/27/2013 03:19:14 PM
+      Page Faults                       0
+      Page Reclaims                     126
+      Page Swaps                        0
+      Voluntary Context Switches        499
+      Involuntary Context Switches      2
+      Block Input Operations            0
+      Block Output Operations           12064
+      
+85         PROC FREQ; tables PRIMARY_MORPHOLOGY*HEMISPHERE /CHISQ;
+
+86         
+87         /* Correlation */
+
+NOTE: There were 384343 observations read from the data set WORK.NEW.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.14 seconds
+      user cpu time       0.04 seconds
+      system cpu time     0.02 seconds
+      memory              1355.39k
+      OS Memory           14908.00k
+      Timestamp           04/27/2013 03:19:14 PM
+      Page Faults                       0
+      Page Reclaims                     244
+      Page Swaps                        0
+      Voluntary Context Switches        294
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           616
+      
+88         PROC CORR; VAR DIAM_CIRCLE_IMAGE DEPTH_RIMFLOOR_TOPOG LATITUDE_CIRCLE_IMAGE;
+
+89         
+90         /* run the program - always required */
+91         run;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.06 seconds
+      user cpu time       0.04 seconds
+      system cpu time     0.01 seconds
+      memory              648.65k
+      OS Memory           14388.00k
+      Timestamp           04/27/2013 03:19:14 PM
+      Page Faults                       0
+      Page Reclaims                     110
+      Page Swaps                        0
+      Voluntary Context Switches        138
+6                                                          The SAS System                             15:18 Saturday, April 27, 2013
+
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           8
+      
+
+92         
+93         
+94         GOPTIONS NOACCESSIBLE;
+95         %LET _CLIENTTASKLABEL=;
+96         %LET _CLIENTPROJECTPATH=;
+97         %LET _CLIENTPROJECTNAME=;
+98         %LET _SASPROGRAMFILE=;
+99         
+100        ;*';*";*/;quit;run;
+101        ODS _ALL_ CLOSE;
+102        
+103        
+104        QUIT; RUN;
+105        
