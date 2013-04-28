@@ -1,0 +1,92 @@
+<h1>The Association between Mars Crater Distance from Equator and Crater Diameter and Depth</h1>
+<h3>Jerry D'Antonio, Akron, Ohio, U.S.A.</h3>
+<p><span><img alt="image" src="http://media.tumblr.com/bcde28b25b73686d822ffdfd5acb39fd/tumblr_inline_mly3etPSuc1qz4rgp.png" /></span></p>
+<h2>Introduction</h2>
+<p>Mars craters come in all shapes and sizes. They also exhibit a wide array of characteristics. Reason would indicate that the diameter of a crater and its depth would be positively related--bigger craters should be deeper--but little is known about the size of a crater in relationship to its other characteristics. It is possible that other factors, such as distance of a crater from the equator, may be related to its size.</p>
+<h2>Research Questions</h2>
+<ol>
+<li><span>Is crater depth associated with its diameter.</span></li>
+<li><span>Is crater diameter associated with its position relative to the equator.</span></li>
+<li><span>Is crater depth associated with its position relative to the equator.</span></li>
+</ol>
+<h2>Methods</h2>
+<h4>Sample</h4>
+<ul>
+<li><span>All craters on Mars (378,540) with diameters greater than or equal to 1 km. as compiled by Stuart Robbins.</span></li>
+<li><span>Dr. Robbins compiled the Mars global crater database while pursuing his Ph.D. in Geophysics from the University of Colorado.</span></li>
+<li><span>The Mars global database was published as part of Dr. Robbins' thesis Planetary "Surface Properties, Cratering Physics, and the Volcanic History of Mars from a New Global Martian Crater Database" in 2011.</span></li>
+</ul>
+<h4>Measures</h4>
+<ul>
+<li><span>Crater latitude was calculated from a best-fit derived center and was measured in decimal degrees North.</span></li>
+<li><span>Diameter was measured in kilometers from the derived center to the rim vertices.</span></li>
+<li><span>Depth was measured in kilometers from the crater rim to the lowest elevation of the crater floor.</span></li>
+<li><span>For some calculations craters were separated into groups representing ten-degree "bands" of latitude.</span></li>
+<li><span>For some calculation crater latitude was rounded down to the nearest whole degree latitude.</span></li>
+</ul>
+<p><img alt="image" src="http://media.tumblr.com/24e9dae10f53262ae90a43d906fac933/tumblr_inline_mly3jbzspu1qz4rgp.png" /></p>
+<p><sub><em>Figure 1: Summary statistics for crater latitude (LATITUDE_CIRCLE_IMAGE), diameter (DIAM_CIRCLE_IMAGE), and depth (DEPTH_RIMFLOOR_TOPOG) calculated with R (functions summary and stat.desc).</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/f09845eafa31799d7888b3aeb9e6d9e8/tumblr_inline_mly3khilzQ1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 2: Correlation of crater latitude (LATITUDE_CIRCLE_IMAGE), diameter (DIAM_CIRCLE_IMAGE), and depth (DEPTH_RIMFLOOR_TOPOG). Proc Correlation procedure. Interpret Pearson Correlation Coefficients.</em></sub></p>
+<h2>Results</h2>
+<h4>Univariate</h4>
+<ul>
+<li><span>The average crater diameter is 3.56 km. (s.d. 8.59)</span></li>
+<li><span>The average crater depth is 0.0758 km. (s.d. 0.2215)</span></li>
+<li><span>The average crater latitude is 7.20 degrees South (s.d. 3.36) showing a slight skew toward the Southern hemisphere.</span></li>
+</ul>
+<h4>Bivariate</h4>
+<ul>
+<li><span>As expected, analysis showed a positive correlation between crater diameter and depth (corr. 0.58671, p &lt; 0.0001), suggesting that 34.4% of the depth variance can be explained by diameter. That is, bigger craters tend to be deeper craters.</span></li>
+<li><span>There is a minimal but significant negative correlation between crater latitude and diameter (corr. -0.05794 p &lt; 0.0001). That is, craters tend to be slightly wider as they get nearer to the equator.</span></li>
+<li><span>There is a minimal but significant negative correlation between crater latitude and depth (corr. -0.04288 p &lt; 0.0001). That is, craters tend to be slightly deeper as they get nearer to the equator.</span></li>
+</ul>
+<p><img alt="image" src="http://media.tumblr.com/c60641e43f10ae681139fa1dae72060e/tumblr_inline_mly4kznvvC1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Chart 1: Crater frequency by nearest degree latitude</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/6fb1906bc98195d5334f2c5ecdb98ee6/tumblr_inline_mly4lff8Ky1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Chart 2: Crater depth by nearest degree latitude</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/dc0d9fc91f44d8de6f31702140b490c3/tumblr_inline_mly4lxsRHI1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Chart 3: Crater diameter by nearest degree latitude</em></sub></p>
+<p></p>
+<h2>Discussion</h2>
+<h4>What might the results mean?</h4>
+<ul>
+<li><span>The distance of a crater from the Mars equator seems to have a small but measurable relationship to its diameter and depth.</span></li>
+</ul>
+<h4>Strength</h4>
+<ul>
+<li><span>Results are based on a comprehensive and statistically complete study of over 380,000 Mars craters.</span></li>
+</ul>
+<h4>Limitations</h4>
+<ul>
+<li><span>Crater diameter and depth had to be calculated based upon a number of factors related to the crater rim. Although mathematically consistent, these values are approximations. The small correlations found in this study could be the result of measuring errors.</span></li>
+</ul>
+<h4>Recommended Future Research</h4>
+<ul>
+<li><span>Further research is needed to determine whether relationships exist between any other characteristics of Mars craters.</span></li>
+</ul>
+<p><img alt="image" src="http://media.tumblr.com/a05be439b9e5556a0efe73a0430424f3/tumblr_inline_mly3miqpaY1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 3: Mean crater latitude (rounded down to nearest whole degree) and standard deviation (quantitative, ordered variable). Variable named NEAREST_LATITUDE. Proc Univariate Procedure.</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/a3e486e63cb0ac6f15027b407cc1cd01/tumblr_inline_mly3mvT3Ve1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 4: Mean crater diameter (rounded down to nearest whole kilometer) and standard deviation (quantitative, ordered variable). Variable named APPROX_DIAMETER. Proc Univariate procedure.</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/0667c8c4c4ac12d7bb62c4eab1a9adcd/tumblr_inline_mly3ne2lpO1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 5: Relationship of crater hemisphere (categorical variable) and crater depth (quantitative variable). Proc ANOVA procedure. Interpret columns F Value and P Value(451.15, 0.0001).</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/cf97db24e852cd3f51d79ba425cd8456/tumblr_inline_mly3nyiXQz1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 6: Relationship of crater latitude group (categorical variable) and crater diameter (quantitative variable). Proc ANOVA procedure. Interpret columns F Value and P Value(99.47, 0.0001).</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/625a41b0f8038650c67ec4e2443a5b53/tumblr_inline_mly3ob58Wy1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 7: Relationship of crater diameter (quantitative variable), crater depth (quantitative variable), and latitude group (categorical variable). Proc ANOVA procedure with Duncan's multiple range test. Interpret column Duncan Grouping. (1 of 2)</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/1575adbdd7286f76ae617c4c6ddf48a3/tumblr_inline_mly3okLqjB1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 8: Relationship of crater diameter (quantitative variable), crater depth (quantitative variable), and latitude group (categorical variable). Proc ANOVA procedure with Duncan's multiple range test. Interpret column Duncan Grouping. (2 of 2)</em></sub></p>
+<p><img alt="image" src="http://media.tumblr.com/2de48341a9ef449ccf479bc7c75d1a0c/tumblr_inline_mly3p3oLYi1qz4rgp.png" /></p>
+<p></p>
+<p><sub><em>Figure 9: Relationship of crater diameter (quantitative variable), crater depth (quantitative variable), and latitude group (categorical variable). Proc ANOVA procedure with Duncan's multiple range test. Interpret column Duncan Grouping. (2 of 2)</em></sub></p>
