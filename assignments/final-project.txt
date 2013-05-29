@@ -1,0 +1,60 @@
+The Association between Mars Crater Distance from Equator and Crater Diameter and Depth
+Jerry D'Antonio, Akron, Ohio, U.S.A.
+
+Introduction
+
+Mars craters come in all shapes and sizes. They also exhibit a wide array of characteristics. Reason would indicate that the diameter of a crater and its depth would be positively related--bigger craters should be deeper--but little is known about the size of a crater in relationship to its other characteristics. It is possible that other factors, such as distance of a crater from the equator, may be related to its size.
+
+Research Questions
+
+1. Is crater depth associated with its diameter.
+2. Is crater diameter associated with its position relative to the equator.
+3. Is crater depth associated with its position relative to the equator.
+
+Methods
+
+Sample
+* All craters on Mars (378,540) with diameters greater than or equal to 1 km. as compiled by Stuart Robbins.
+* Dr. Robbins compiled the Mars global crater database while pursuing his Ph.D. in Geophysics from the University of Colorado.
+* The Mars global database was published as part of Dr. Robbins' thesis Planetary "Surface Properties, Cratering Physics, and the Volcanic History of Mars from a New Global Martian Crater Database" in 2011.
+
+Measures
+* Crater latitude was calculated from a best-fit derived center and was measured in decimal degrees North.
+* Diameter was measured in kilometers from the derived center to the rim vertices.
+* Depth was measured in kilometers from the crater rim to the lowest elevation of the crater floor.
+* For some calculations craters were separated into groups representing ten-degree "bands" of latitude.
+* For some calculation crater latitude was rounded down to the nearest whole degree latitude.
+
+Results
+
+Univariate
+* The average crater diameter is 3.56 km. (s.d. 8.59)
+* The average crater depth is 0.0758 km. (s.d. 0.2215)
+* The average crater latitude is 7.20 degrees South (s.d. 3.36) showing a slight skew toward the Southern hemisphere.
+
+Bivariate
+* As expected, analysis showed a positive correlation between crater diameter and depth (corr. 0.58671, p < 0.0001), suggesting that 34.4% of the depth variance can be explained by diameter. That is, bigger craters tend to be deeper craters.
+* There is a minimal but significant negative correlation between crater latitude and diameter (corr. -0.05794 p < 0.0001). That is, craters tend to be slightly wider as they get nearer to the equator.
+* There is a minimal but significant negative correlation between crater latitude and depth (corr. -0.04288 p < 0.0001). That is, craters tend to be slightly deeper as they get nearer to the equator.
+
+Discussion
+
+What might the results mean?
+* The distance of a crater from the Mars equator seems to have a small but measurable relationship to its diameter and depth.
+
+Strength
+* Results are based on a comprehensive and statistically complete study of over 380,000 Mars craters.
+
+Limitations
+* Crater diameter and depth had to be calculated based upon a number of factors related to the crater rim. Although mathematically consistent, these values are approximations. The small correlations found in this study could be the result of measuring errors.
+
+Recommended Future Research
+* Further research is needed to determine whether relationships exist between any other characteristics of Mars craters.
+
+<script src="https://gist.github.com/jdantonio/5474378.js"></script>
+https://gist.github.com/jdantonio/5474378
+
+<script src="https://gist.github.com/jdantonio/5474548.js"></script>
+https://gist.github.com/jdantonio/5474548
+
+
